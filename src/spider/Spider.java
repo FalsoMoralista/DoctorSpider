@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class Spider {
 
-    private static final int TO_SEARCH = 3; // amount of pages
+    private static final int TO_SEARCH = 35; // amount of pages
     private Set<String> visited = new HashSet<>(); // already visited
     private List<String> toVisit = new LinkedList<>(); // to visit
 
@@ -35,7 +35,7 @@ public class Spider {
      * @param word
      */
     public void search(String url, String word){
-        while(this.toVisit.size() < TO_SEARCH){ // while the determinated amount of sites has not been visited
+        while(this.visited.size() < TO_SEARCH){ // while the determinated amount of sites has not been visited
             String currentUrl;
             SpiderLeg leg = new SpiderLeg();
             if(this.toVisit.isEmpty()){ // if there's no url, start from this
