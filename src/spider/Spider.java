@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class Spider {
 
-    private static final int TO_SEARCH = 35; // amount of pages
+    private static final int TO_SEARCH = 7; // amount of pages
     private Set<String> visited = new HashSet<>(); // already visited
     private List<String> toVisit = new LinkedList<>(); // to visit
 
@@ -50,7 +50,7 @@ public class Spider {
                 System.out.println("Word found: "+word+" at "+currentUrl);
                 break;
             }
-            visited.addAll(leg.getLinks()); //  save all visited links
+            toVisit.addAll(leg.getLinks()); //  save all visited links
         }
         System.out.println("Done");
         System.out.println("Page(s) visited: "+visited.size());
