@@ -6,11 +6,8 @@
 package spider;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -40,10 +37,6 @@ public class SpiderLeg {
             this.htmlDocument = document;
             if(connection.response().statusCode() == 200){ // code 200 for HTTP means OK(connection established)
                 System.out.println("**Connected sucessfully**, web page received "+url);
-//                Iterator i = htmlDocument.select("a[href]").iterator();
-//                while(i.hasNext()){
-//                    System.out.println(i.next().toString());                    
-//                }
             }if(!connection.response().contentType().contains("text/html")){
                 System.out.println("Error -> received something that isn't HTML");
                 return false;
@@ -58,7 +51,7 @@ public class SpiderLeg {
             System.out.println("Error -> the request failed");
             return false;
         }catch(IllegalArgumentException iae){
-            System.out.println("Error -> the request is something other than a page");
+            System.out.println("Error -> the response is something other than a page");
             return false;
         }
     }
@@ -77,4 +70,8 @@ public class SpiderLeg {
     public List<String> getLinks(){
         return this.links;
     }    
+    
+    public Document getDocument(){
+        return this.htmlDocument;
+    }
 }
