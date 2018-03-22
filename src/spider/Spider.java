@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class Spider {
 
-    private static final int TO_SEARCH = 10; // amount of pages
+    private static final int TO_SEARCH = 3; // amount of pages
     private Set<String> visited = new HashSet<>(); // already visited
     private List<String> toVisit = new LinkedList<>(); // to visit
 
@@ -29,23 +29,28 @@ public class Spider {
         return nextUrl;
     }
     
+    /**
+     * Search from a word starting from an given URL
+     * @param url
+     * @param word
+     */
     public void search(String url, String word){
-        while(this.toVisit.size() < TO_SEARCH){
+        while(this.toVisit.size() < TO_SEARCH){ // while the determinated amount of sites has not been visited
             String currentUrl;
-            Leg leg = new Leg();
-            if(this.toVisit.isEmpty()){
+            SpiderLeg leg = new SpiderLeg();
+            if(this.toVisit.isEmpty()){ // if there's no url, start from this
                 currentUrl = url;
                 this.visited.add(url);
             }else{
-                currentUrl = this.nextUrl();    
+                currentUrl = this.nextUrl(); // otherwise, get the next url in list
             }            
             leg.crawl(currentUrl);
             boolean op = leg.searchWord(word);
-            if(op){
+            if(op){ // if found
                 System.out.println("Word found: "+word+" at "+currentUrl);
                 break;
             }
-            visited.addAll(leg.getLinks());
+            visited.addAll(leg.getLinks()); //  save all visited links
         }
         System.out.println("Done");
         System.out.println("Page(s) visited: "+visited.size());
