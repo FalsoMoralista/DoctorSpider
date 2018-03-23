@@ -9,9 +9,6 @@ package util;
  *
  * @author luciano
  */
-public class Doctor {
-    private String name;
-    private String speciality;
-    private String subspecialities;
-    private String profissionalID;
+public interface IParser {
+    public void collectInfo();
 }
