@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spider;
+package spiders;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class Spider {
 
-    private static final int TO_SEARCH = 7; // amount of pages
+    private static final int TO_SEARCH = 100; // amount of pages
     private Set<String> visited = new HashSet<>(); // already visited
     private List<String> toVisit = new LinkedList<>(); // to visit
 
