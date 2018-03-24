@@ -73,11 +73,14 @@ public class SpiderLeg extends Crawler{
         return this.links;
     }    
     
+<<<<<<< HEAD:src/spiders/SpiderLeg.java
     /**
      *
      * @return
      */
     @Override
+=======
+>>>>>>> aff59b6c94fb453d717a566908a536dafc2119df:src/spider/SpiderLeg.java
     public Document getDocument(){
         return this.htmlDocument;
     }

@@ -8,7 +8,10 @@ package util;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+<<<<<<< HEAD
 import interfaces.IParser;
+=======
+>>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
 
 /**
  *
@@ -21,12 +24,18 @@ public class MyParser implements IParser {
     public MyParser(Document doc) {
         this.doc = doc;
     }
+<<<<<<< HEAD
     
     /**
      *  Parse info 
      */
     @Override
     public void parse() {
+=======
+
+    @Override
+    public void collectInfo() {
+>>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
         
         Elements elements = doc.getElementsByClass("title").select("h1");
         System.out.println(elements.text());

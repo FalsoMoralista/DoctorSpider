@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/luciano/Desktop/LUCIANO-UEFS/Java/Spider/src/spider/SpiderLeg.java</file>
             <file>file:/home/luciano/Desktop/LUCIANO-UEFS/Java/Spider/src/spider/Spider.java</file>
             <file>file:/home/luciano/Desktop/LUCIANO-UEFS/Java/Spider/src/runner/Run.java</file>
+=======
+            <file>file:/home/luciano/Desktop/DoctorSpider/src/util/Doctor.java</file>
+            <file>file:/home/luciano/Desktop/DoctorSpider/src/runner/Run.java</file>
+            <file>file:/home/luciano/Desktop/DoctorSpider/src/util/IParser.java</file>
+            <file>file:/home/luciano/Desktop/DoctorSpider/src/util/MyParser.java</file>
+>>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
         </group>
     </open-files>
 </project-private>

@@ -5,12 +5,19 @@
  */
 package runner;
 
+<<<<<<< HEAD
 import java.util.LinkedList;
 import java.util.List;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import spiders.SpiderLeg;
+=======
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import spider.SpiderLeg;
+>>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
 import util.MyParser;
 
 /**
@@ -20,6 +27,7 @@ import util.MyParser;
  */
 public class Run {
 
+<<<<<<< HEAD
     private static final String url = "";
     private static final String url2 = "";
     private static final String url3 = "";
@@ -61,5 +69,20 @@ public class Run {
             counter++;
         }
         return relevantLinks;
+=======
+    private static final String url = "https://www.doctoralia.com.br/medico/simarro+rios+jose+eduardo-12784612";
+    private static final String url2 = "https://www.doctoralia.com.br/medico/rodrigues+luciano-14806720";
+
+    public static void main(String[] args) {
+        SpiderLeg leg = new SpiderLeg();
+
+        long time = System.currentTimeMillis();
+
+        leg.crawl(url2);
+        Document doc = leg.getDocument();
+        MyParser parser = new MyParser(doc);
+        parser.collectInfo();
+        System.out.println("Tempo total:\t\t" + String.format("%.2f", (System.currentTimeMillis() - time) / 1000.0 / 3600.0));;
+>>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
     }
 }
