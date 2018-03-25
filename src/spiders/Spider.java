@@ -5,10 +5,15 @@
  */
 package spiders;
 
+import exceptions.EmptyDocumentFieldException;
+import exceptions.FailedRequestException;
+import exceptions.InvalidTypeOfResponseException;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +40,8 @@ public class Spider {
      * @param word
      */
     public void search(String url, String word){
-        while(this.visited.size() < TO_SEARCH){ // while the determinated amount of sites has not been visited
+        while(this.visited.size() < TO_SEARCH){ try {
+            // while the determinated amount of sites has not been visited
             String currentUrl;
             SpiderLeg leg = new SpiderLeg();
             if(this.toVisit.isEmpty()){ // if there's no url, start from this
@@ -51,6 +57,13 @@ public class Spider {
                 break;
             }
             toVisit.addAll(leg.getLinks()); //  save all visited links
+            } catch (InvalidTypeOfResponseException ex) {
+                Logger.getLogger(Spider.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FailedRequestException ex) {
+                Logger.getLogger(Spider.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (EmptyDocumentFieldException ex) {
+                Logger.getLogger(Spider.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         System.out.println("Done");
         System.out.println("Page(s) visited: "+visited.size());

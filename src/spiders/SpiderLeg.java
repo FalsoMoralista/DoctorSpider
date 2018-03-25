@@ -5,6 +5,9 @@
  */
 package spiders;
 
+import exceptions.FailedRequestException;
+import exceptions.InvalidTypeOfResponseException;
+import exceptions.EmptyDocumentFieldException;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +16,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 /**
  *
  * @author luciano
@@ -29,9 +31,11 @@ public class SpiderLeg extends Crawler{
      *  Makes a HTTP request, gets the document and its links then 
      * @param url
      * @return 
+     * @throws exceptions.InvalidTypeOfResponseException 
+     * @throws exceptions.FailedRequestException 
      */
     @Override
-    public boolean crawl(String url){
+    public boolean crawl(String url)throws InvalidTypeOfResponseException, FailedRequestException{
         try {
             Connection connection = Jsoup.connect(url).userAgent(USER_AGENT); // try to establish a connection with the passed URL using the fake web browser(USER_AGENT)
             Document document = connection.get(); //  request its document(webpage)
@@ -39,8 +43,7 @@ public class SpiderLeg extends Crawler{
             if(connection.response().statusCode() == 200){ // code 200 for HTTP means OK(connection established)
                 System.out.println("**Connected sucessfully**, web page received "+url);
             }if(!connection.response().contentType().contains("text/html")){
-                System.out.println("Error -> received something that isn't HTML");
-                return false;
+                throw new InvalidTypeOfResponseException();
             }
             Elements linksOnPage = document.select("a[href]");
             System.out.println("Found "+"["+linksOnPage.size()+"]"+" links on this page");
@@ -49,19 +52,17 @@ public class SpiderLeg extends Crawler{
             }
             return true;
         } catch (IOException ex) {
-            System.out.println("Error -> the request failed");
-            return false;
+            throw new FailedRequestException();
         }catch(IllegalArgumentException iae){
             System.out.println("Error -> the response is something other than a page");
             return false;
         }
     }
     
-    public boolean searchWord(String word){
+    public boolean searchWord(String word) throws EmptyDocumentFieldException{
 
         if(this.htmlDocument == null){
-            System.out.println("Error -> empty document, certify the method Crawl() has been called");
-            return false;
+            throw new EmptyDocumentFieldException();
         }
         System.out.println("Searching for the word "+ word+" ...");
         String bodyText = this.htmlDocument.body().text(); // gets the document body text
@@ -73,14 +74,11 @@ public class SpiderLeg extends Crawler{
         return this.links;
     }    
     
-<<<<<<< HEAD:src/spiders/SpiderLeg.java
     /**
      *
      * @return
      */
     @Override
-=======
->>>>>>> aff59b6c94fb453d717a566908a536dafc2119df:src/spider/SpiderLeg.java
     public Document getDocument(){
         return this.htmlDocument;
     }

@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util;
+package exceptions;
 
 /**
  *
  * @author luciano
  */
-public interface IParser {
-    public void collectInfo();
+public class FailedRequestException extends Exception {
+    public FailedRequestException(){
+        super("Error -> the request failed ");
+    }
 }

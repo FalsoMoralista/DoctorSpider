@@ -6,6 +6,8 @@
 package util;
 
 import interfaces.IParser;
+import java.util.LinkedList;
+import java.util.List;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -22,16 +24,14 @@ public class MyParser2 implements IParser{
     }
     
     @Override
-    public void parse() {
-          Elements elements = doc.getElementsByClass("media doctor").select("a");
-          System.out.println(elements.attr("href"));
-    }
-
-    //fix this
-    @Override
-    public String toString(){
-        Elements elements = doc.getElementsByClass("media doctor").select("a");          
-        return elements.attr("href");
-    }
-    
+    public List<String> parse() {
+        List<String> list = new LinkedList();
+          Elements elements = doc.getElementsByClass("photo").select("a");
+          elements.forEach(e ->{              
+              if(!e.attr("href").contains("centro-medico")){
+                  list.add(e.attr("href"));                  
+              }
+          });
+          return list;
+    }    
 }

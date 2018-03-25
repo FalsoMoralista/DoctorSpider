@@ -5,6 +5,9 @@
  */
 package spiders;
 
+import exceptions.EmptyDocumentFieldException;
+import exceptions.FailedRequestException;
+import exceptions.InvalidTypeOfResponseException;
 import interfaces.ICrawlExperiment;
 import interfaces.ICrawler;
 import java.io.IOException;
@@ -15,6 +18,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import util.MyParser2;
 
 /**
  *
@@ -37,27 +41,26 @@ public class DoctorCrawler extends Crawler {
     }
 
     @Override
-    public boolean crawl(String url) {
+    public boolean crawl(String url) throws InvalidTypeOfResponseException, FailedRequestException {
         try {
             Connection connection = Jsoup.connect(url).userAgent(USER_AGENT); // try to establish a connection with the passed URL using the fake web browser(USER_AGENT)
             Document document = connection.get(); //  request its document(webpage)
+            
             this.htmlDocument = document;
             if (connection.response().statusCode() == 200) { // code 200 for HTTP means OK(connection established)
                 System.out.println("**Connected sucessfully**, web page received " + url);
             }
             if (!connection.response().contentType().contains("text/html")) {
-                System.out.println("Error -> received something that isn't HTML");
-                return false;
+                throw new InvalidTypeOfResponseException();
             }
             Elements linksOnPage = document.select("a[href]");
-            System.out.println("Found " + "[" + linksOnPage.size() + "]" + " links on this page");
+//            System.out.println("Found " + "[" + linksOnPage.size() + "]" + " links on this page");
             for (Element link : linksOnPage) {
                 links.add(link.absUrl("href"));
             }
             return true;
         } catch (IOException ex) {
-            System.out.println("Error -> the request failed");
-            return false;
+            throw new FailedRequestException();
         } catch (IllegalArgumentException iae) {
             System.out.println("Error -> the response is something other than a page");
             return false;
@@ -72,12 +75,22 @@ public class DoctorCrawler extends Crawler {
     public List<String> getSourceLinks() {
         return this.srcLinks;
     }
+
+    public List<String> getParsedRelevantLinks() {
+        List<String> list = new LinkedList<>();
+        this.links.forEach(link ->{
+        });
+        return this.srcLinks;
+    }
     
     private void generateSourceLinks(){        
     }
 
     @Override
-    public Document getDocument() {
+    public Document getDocument() throws EmptyDocumentFieldException {
+        if(this.htmlDocument == null){
+            throw new EmptyDocumentFieldException();
+        }
         return this.htmlDocument;
     }
 

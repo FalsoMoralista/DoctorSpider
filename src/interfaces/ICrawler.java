@@ -5,6 +5,9 @@
  */
 package interfaces;
 
+import exceptions.FailedRequestException;
+import exceptions.InvalidTypeOfResponseException;
+import exceptions.EmptyDocumentFieldException;
 import java.util.List;
 import org.jsoup.nodes.Document;
 
@@ -12,8 +15,8 @@ import org.jsoup.nodes.Document;
  *
  * @author luciano
  */
-public interface ICrawler {
+public interface ICrawler{
     public boolean crawl(String url);
     public List <String> getLinks();
-    public Document getDocument();
+    public Document getDocument() throws EmptyDocumentFieldException, InvalidTypeOfResponseException, FailedRequestException;
 }

@@ -8,10 +8,8 @@ package util;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-<<<<<<< HEAD
 import interfaces.IParser;
-=======
->>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
+import java.util.List;
 
 /**
  *
@@ -24,18 +22,11 @@ public class MyParser implements IParser {
     public MyParser(Document doc) {
         this.doc = doc;
     }
-<<<<<<< HEAD
     
     /**
      *  Parse info 
      */
-    @Override
-    public void parse() {
-=======
-
-    @Override
-    public void collectInfo() {
->>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
+    public void parse2() {
         
         Elements elements = doc.getElementsByClass("title").select("h1");
         System.out.println(elements.text());
@@ -63,5 +54,10 @@ public class MyParser implements IParser {
             System.out.println("city code= " + e.select("a").attr("data-city-key"));
             System.out.println("");
         }
+    }
+
+    @Override
+    public List<String> parse() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

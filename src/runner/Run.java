@@ -5,19 +5,19 @@
  */
 package runner;
 
-<<<<<<< HEAD
+import exceptions.FailedRequestException;
+import exceptions.InvalidTypeOfResponseException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import spiders.SpiderLeg;
-=======
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import spider.SpiderLeg;
->>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
 import util.MyParser;
 
 /**
@@ -27,7 +27,6 @@ import util.MyParser;
  */
 public class Run {
 
-<<<<<<< HEAD
     private static final String url = "";
     private static final String url2 = "";
     private static final String url3 = "";
@@ -46,7 +45,13 @@ public class Run {
     
     public static void experiment(){
         SpiderLeg leg = new SpiderLeg();
-        leg.crawl(url3);
+        try {
+            leg.crawl(url3);
+        } catch (InvalidTypeOfResponseException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FailedRequestException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
         List<String> links = leg.getLinks();
         List<Document> documents = new LinkedList();
         System.out.println(links.size());
@@ -58,31 +63,23 @@ public class Run {
     }
     
     public static List getRelevantLinks(String startingUrl){
-        String url = startingUrl;
-        SpiderLeg leg = new SpiderLeg();
-        List relevantLinks = new LinkedList();
-        int counter = 1;
-        while(leg.crawl(url)){
-            relevantLinks.add(url);
-            url = startingUrl+"/"+Integer.toString(counter);           
-            System.out.println(url);
-            counter++;
+        try {
+            String url = startingUrl;
+            SpiderLeg leg = new SpiderLeg();
+            List relevantLinks = new LinkedList();
+            int counter = 1;
+            while(leg.crawl(url)){
+                relevantLinks.add(url);
+                url = startingUrl+"/"+Integer.toString(counter);
+                System.out.println(url);
+                counter++;
+            }
+            return relevantLinks;
+        } catch (InvalidTypeOfResponseException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FailedRequestException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return relevantLinks;
-=======
-    private static final String url = "https://www.doctoralia.com.br/medico/simarro+rios+jose+eduardo-12784612";
-    private static final String url2 = "https://www.doctoralia.com.br/medico/rodrigues+luciano-14806720";
-
-    public static void main(String[] args) {
-        SpiderLeg leg = new SpiderLeg();
-
-        long time = System.currentTimeMillis();
-
-        leg.crawl(url2);
-        Document doc = leg.getDocument();
-        MyParser parser = new MyParser(doc);
-        parser.collectInfo();
-        System.out.println("Tempo total:\t\t" + String.format("%.2f", (System.currentTimeMillis() - time) / 1000.0 / 3600.0));;
->>>>>>> aff59b6c94fb453d717a566908a536dafc2119df
+        return null;
     }
 }

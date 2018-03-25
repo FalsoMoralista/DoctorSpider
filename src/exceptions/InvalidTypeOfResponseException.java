@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
-
-import java.util.List;
+package exceptions;
 
 /**
  *
  * @author luciano
  */
-public interface IParser {
-    public List<String> parse();
+public class InvalidTypeOfResponseException extends Exception{
+    public InvalidTypeOfResponseException(){
+        super("error -> retrieved something that isn't HTML");
+    }
 }
