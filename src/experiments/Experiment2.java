@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -26,7 +27,7 @@ import util.parsers.ParseEqualLinks;
 import util.parsers.ParseEspecialities;
 
 /**
- * Will generate needed maps.
+ * Indexed all doctors by especiality.
  *
  * @author luciano
  */
@@ -35,17 +36,17 @@ public class Experiment2 implements ICrawlExperiment {
     private DoctorCrawler crawler = new DoctorCrawler();
 
     private static final String especialitiesPath = "/home/luciano/Desktop/LUCIANO-UEFS/Java/Spider/src/util/documents/especialities.map";
-    private static final String sourceLink = "https://www.doctoralia.com.br/lista-de-medicos";
     private Properties especialitiesMap = new Properties();
 
     @Override
     public void run() {
         this.setUp();
-        for (int i = 0; i < especialitiesMap.size(); i++) {
-            ParseEqualLinks links = new ParseEqualLinks(especialitiesMap.getProperty(Integer.toString(i)));
-            List<String> documents = links.parse();
-            writeFile(documents,"/home/luciano/Desktop/LUCIANO-UEFS/Java/Spider/src/util/especialities/","especiality_"+i+".map");
-        }
+        this.generateDirectoryMap("/home/luciano/Desktop/ic/Joao/Files/especialities", "fileMap.map");
+//        for (int i = 0; i < especialitiesMap.size(); i++) {
+//            ParseEqualLinks links = new ParseEqualLinks(especialitiesMap.getProperty(Integer.toString(i)));
+//            List<String> documents = links.parse();
+//            writeFile(documents,"/home/luciano/Desktop/LUCIANO-UEFS/Java/Spider/src/util/especialities/","especiality_"+i+".map");
+//        }
     }
 
     private void setUp() {
@@ -76,11 +77,6 @@ public class Experiment2 implements ICrawlExperiment {
         }
     }
 
-    public static void main(String[] args) {
-        Experiment2 exp = new Experiment2();
-        exp.run();
-    }
-
     private void writeFile(List<String> document, String path, String filename) {
         File f =  new File(path+filename);
         try {
@@ -96,5 +92,15 @@ public class Experiment2 implements ICrawlExperiment {
         } catch (IOException ex) {
             Logger.getLogger(Experiment2.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void generateDirectoryMap(String dir, String filename){
+        File file = new File(dir);
+        System.out.println(Arrays.toString(file.listFiles()));
+    }
+    
+    public static void main(String[] args) {
+        Experiment2 exp = new Experiment2();
+        exp.run();
     }
 }
