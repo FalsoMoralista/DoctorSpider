@@ -18,7 +18,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import util.MyParser2;
+import util.parsers.MyParser2;
 
 /**
  *
@@ -29,7 +29,7 @@ public class DoctorCrawler extends Crawler {
     private Document htmlDocument;
     private List<String> links = new LinkedList<>();
     private List<String> srcLinks;
-    private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
+    private String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
     private String startingUrl;
 
     public DoctorCrawler() {
@@ -55,9 +55,9 @@ public class DoctorCrawler extends Crawler {
             }
             Elements linksOnPage = document.select("a[href]");
 //            System.out.println("Found " + "[" + linksOnPage.size() + "]" + " links on this page");
-            for (Element link : linksOnPage) {
-                links.add(link.absUrl("href"));
-            }
+            linksOnPage.forEach(link ->{
+                links.add(link.absUrl("href"));                
+            });
             return true;
         } catch (IOException ex) {
             throw new FailedRequestException();
@@ -94,4 +94,11 @@ public class DoctorCrawler extends Crawler {
         return this.htmlDocument;
     }
 
+    public void setUserAgent(String userAgent){
+        this.USER_AGENT = userAgent;
+    }
+    
+    public String getUserAgent(){
+        return this.USER_AGENT;
+    }
 }

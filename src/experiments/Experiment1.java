@@ -24,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.select.Elements;
 import spiders.DoctorCrawler;
-import util.MyParser2;
+import util.parsers.MyParser2;
 
 /**
  * Used to create a document map, then a query map. The query map will be

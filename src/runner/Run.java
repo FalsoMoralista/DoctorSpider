@@ -18,7 +18,7 @@ import spiders.SpiderLeg;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import util.MyParser;
+import util.parsers.MyParser;
 
 /**
  * TODO: create mechanism to read a configuration file before run the experiment
