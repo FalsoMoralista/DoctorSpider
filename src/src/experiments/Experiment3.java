@@ -25,32 +25,12 @@ import util.parsers.MyParser;
 public class Experiment3 implements ICrawlExperiment{
     
     private Properties fileMap = new Properties();
-<<<<<<< HEAD
-    private static final String FILE_PATH = "/home/luciano/Desktop/LUCIANO-UEFS/Java/Resources/doctors/indexedDoctors.map";
-    private static int dif;    
-=======
     private static final String FILE_PATH = "";
     
->>>>>>> b4aefbb12994c41b7aef0f5c78b4632588872491
     private DoctorCrawler spider = new DoctorCrawler();
     
     @Override
     public void run() {
-<<<<<<< HEAD
-        this.setUp();
-        for(int i = 0; i < fileMap.size(); i++){
-            try {
-                spider.crawl(fileMap.getProperty(Integer.toString(i)));
-                MyParser parser = new MyParser(spider.getDocument());                
-                System.out.println(parser.parse().toString());
-            } catch (InvalidTypeOfResponseException | FailedRequestException | EmptyDocumentFieldException ex) {
-                Logger.getLogger(Experiment3.class.getName()).log(Level.SEVERE, null, ex);
-            }catch(NullPointerException ex){
-                dif++;
-            }            
-        }
-        System.out.println("Numero de paginas nao parsadas-> "+dif);
-=======
         for(int i = 0; i < fileMap.size(); i++){
             try {
                 spider.crawl(fileMap.getProperty(Integer.toString(i)));
@@ -59,7 +39,6 @@ public class Experiment3 implements ICrawlExperiment{
                 Logger.getLogger(Experiment3.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
->>>>>>> b4aefbb12994c41b7aef0f5c78b4632588872491
     }
 
     private void setUp(){
@@ -71,16 +50,11 @@ public class Experiment3 implements ICrawlExperiment{
             Logger.getLogger(Experiment3.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-<<<<<<< HEAD
     
     public static void main(String[] args) throws InvalidTypeOfResponseException, FailedRequestException, EmptyDocumentFieldException{
-//        DoctorCrawler crawler = new DoctorCrawler();
-//        crawler.crawl("https://www.doctoralia.com.br/medico/boarini+rochele+lopes+rodrigues-10586080");
-//        System.out.println(crawler.getDocument().getElementsByClass("doctorplacesaddress").select("a").attr("data-full-address"));
-//        System.out.println(new MyParser(crawler.getDocument()).parse());
-        Experiment3 exp = new Experiment3();
-        exp.run();
+        DoctorCrawler crawler = new DoctorCrawler();
+        crawler.crawl("https://www.doctoralia.com.br/medico/vidal+laira-14786251");
+        MyParser parser = new MyParser(crawler.getDocument());
+        System.out.println(parser.parse().toString());
     }
-=======
->>>>>>> b4aefbb12994c41b7aef0f5c78b4632588872491
 }

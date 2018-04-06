@@ -47,11 +47,7 @@ public class MyParser implements IParser {
 
         elements = doc.getElementsByClass("address");
         for (Element e : elements) {
-<<<<<<< HEAD
             attrs.add(e.text());
-=======
-            attrs.add(e.text().substring(0, e.text().indexOf("|")) + " ");
->>>>>>> b4aefbb12994c41b7aef0f5c78b4632588872491
             attrs.add("lat= " + e.select("a").attr("data-lat") + " ");
             attrs.add("long= " + e.select("a").attr("data-lng") + " ");
             attrs.add("city code= " + e.select("a").attr("data-city-key") + " ");
