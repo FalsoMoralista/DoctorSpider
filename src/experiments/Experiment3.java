@@ -75,7 +75,7 @@ public class Experiment3 implements ICrawlExperiment{
     
     public static void main(String[] args) throws InvalidTypeOfResponseException, FailedRequestException, EmptyDocumentFieldException{
 //        DoctorCrawler crawler = new DoctorCrawler();
-//        crawler.crawl("https://www.doctoralia.com.br/medico/boarini+rochele+lopes+rodrigues-10586080");
+//        crawler.crawl("");
 //        System.out.println(crawler.getDocument().getElementsByClass("doctorplacesaddress").select("a").attr("data-full-address"));
 //        System.out.println(new MyParser(crawler.getDocument()).parse());
         Experiment3 exp = new Experiment3();
