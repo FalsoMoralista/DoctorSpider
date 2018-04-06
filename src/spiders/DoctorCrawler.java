@@ -43,7 +43,7 @@ public class DoctorCrawler extends Crawler {
     @Override
     public boolean crawl(String url) throws InvalidTypeOfResponseException, FailedRequestException {
         try {
-            Connection connection = Jsoup.connect(url).userAgent(USER_AGENT); // try to establish a connection with the passed URL using the fake web browser(USER_AGENT)
+            Connection connection = Jsoup.connect(url).userAgent(USER_AGENT).timeout(0); // try to establish a connection with the passed URL using the fake web browser(USER_AGENT)
             Document document = connection.get(); //  request its document(webpage)
             
             this.htmlDocument = document;
