@@ -37,50 +37,29 @@ public class Experiment2 implements ICrawlExperiment {
 
     private DoctorCrawler crawler = new DoctorCrawler();
 
-<<<<<<< HEAD
     private static final String specialtiesMapPath = "/home/luciano/Desktop/Joao/Files/especialities/fileMap.map";
     private Properties fileMap = new Properties();
 
     private static final String outputPath = "/home/luciano/Desktop/Joao/Files/doctors/";
-=======
-    private static final String specialtiesMapPath = "/home/luciano/Desktop/ic/Joao/Files/especialities/fileMap.map";
-    private Properties fileMap = new Properties();
-
-    private static final String outputPath = "/home/luciano/Desktop/ic/Joao/Files/doctors/";
->>>>>>> b4aefbb12994c41b7aef0f5c78b4632588872491
     private static int count;
     
     @Override
     public void run() {
         this.setUp();
-<<<<<<< HEAD
         for (int i = 37; i < fileMap.size(); i++) {
             List<String> doctors = new LinkedList();
             try {
                 Properties specialty = new Properties();// this will be used to load each specialty
                 specialty.load(new FileInputStream(fileMap.getProperty(Integer.toString(i)))); // load a map of specialties
                 for (int j = 0; j < specialty.size(); j++) { // this will be used to get all the lines from a specialty map
-=======
-        for (int i = 0; i < fileMap.size(); i++) {
-            List<String> doctors = new LinkedList();
-            try {
-                Properties specialty = new Properties();// this will be used to load each specialty
-                specialty.load(new FileInputStream(fileMap.getProperty(Integer.toString(i)))); // load the map of specialties
-                for (int j = 0; j < specialty.size(); j++) { // this will be used to get all the lines from an specialty map
->>>>>>> b4aefbb12994c41b7aef0f5c78b4632588872491
                     crawler.crawl(specialty.getProperty(Integer.toString(j))); // crawl a link  
                     MyParser2 parseAllRelevantLinks = new MyParser2(crawler.getDocument()); // get it's document
                     List<String> relevantLinks = parseAllRelevantLinks.parse(); // get all relevant(parsed) links
                     doctors.addAll(relevantLinks);// save it on a list
                 }
-<<<<<<< HEAD
                 System.out.println("found ->"+doctors.size()+"links");
                 indexAllDoctors(outputPath, "indexedDoctors.map", doctors);// then append it to a file
                 System.out.println("** done **"+" ["+i+"/"+fileMap.size()+"]");
-=======
-                System.out.println("** done **"+" ["+i+"/"+fileMap.size()+"]");
-                indexAllDoctors(outputPath, "indexedDoctors.map", doctors);// then append it to a file
->>>>>>> b4aefbb12994c41b7aef0f5c78b4632588872491
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Experiment2.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException | InvalidTypeOfResponseException | FailedRequestException | EmptyDocumentFieldException ex) {
@@ -134,11 +113,7 @@ public class Experiment2 implements ICrawlExperiment {
         }
     }
 
-<<<<<<< HEAD
    private static void generateDirectoryMap(String dir, String filename) {
-=======
-    private void generateDirectoryMap(String dir, String filename) {
->>>>>>> b4aefbb12994c41b7aef0f5c78b4632588872491
         try {
             File[] files = new File(dir).listFiles();
             File f = new File(dir + filename);
