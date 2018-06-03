@@ -104,6 +104,8 @@ public class DoctorParser {
 
             } catch (FailedRequestException exc) {
                 System.out.println(exc.getMessage());
+            }catch(NullPointerException ex){
+                System.out.println("Site vazio");
             }
         }
     }
