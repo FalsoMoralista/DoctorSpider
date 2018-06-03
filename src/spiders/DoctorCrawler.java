@@ -64,7 +64,7 @@ public class DoctorCrawler extends Crawler {
         } catch (IllegalArgumentException iae) {
             System.out.println("Error -> the response is something other than a page");
             return false;
-        }
+        }        
     }
 
     @Override
