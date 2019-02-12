@@ -23,10 +23,7 @@ import spiders.DoctorCrawler;
  */
 public class ClinicParser {
 
-    String[] links = {"https://www.doctoralia.com.br/centro-medico/climed-+medicos+associados-2510473",
-        "https://www.doctoralia.com.br/centro-medico/clinica+do+calculo+renal-2529081",
-        "https://www.doctoralia.com.br/centro-medico/self+clinica+psicanalitica-2534858",
-        "https://www.doctoralia.com.br/centro-medico/clinica+reability+sao+caetano+do+sul-2485761"};
+    String[] links = {""};
 
     private DoctorCrawler crawler = new DoctorCrawler();
 
